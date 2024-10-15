@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserInfoService implements UserDetailsService {
@@ -46,6 +47,7 @@ public class UserInfoService implements UserDetailsService {
 
     public ResponseDto addUser(UserInfo userInfo) {
         userInfo.setPassword(encoder.encode(userInfo.getPassword()));
+        userInfo.setUserIdentifier(UUID.randomUUID());
         repository.save(userInfo);
         return new ResponseDto("User Added Successfully");
     }

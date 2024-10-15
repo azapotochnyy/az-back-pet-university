@@ -15,6 +15,7 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Function;
 
 @Component
@@ -28,14 +29,16 @@ public class JwtService {
     public ResponseDto generateToken(UserInfo userInfo) {
 
         Map<String, Object> claims = new HashMap<>();
-        return new ResponseDto(createToken(claims, userInfo.getName(), userInfo.getRoles()));
+        return new ResponseDto(createToken(claims, userInfo.getName(), userInfo.getRoles(), userInfo.getUserIdentifier()));
     }
 
-    private String createToken(Map<String, Object> claims, String userName, String userRole) {
+    private String createToken(Map<String, Object> claims, String userName,
+                               String userRole, UUID identifier) {
         return Jwts.builder()
                 .setClaims(claims)
                 .claim("role", userRole)
                 .claim("name", userName)
+                .claim("identifier", identifier)
                 .setSubject(userName)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
