@@ -8,10 +8,12 @@ import com.university.task.fullstack.repository.MenuRepository;
 import com.university.task.fullstack.repository.UserInfoRepository;
 import com.university.task.fullstack.service.MenuService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -37,6 +39,12 @@ public class MenuServiceImpl implements MenuService {
         newMenu.setDate(menuDto.getDate());
         newMenu.setUsers(users);
         return menuRepository.save(newMenu);
+    }
+
+    @Override
+    public List<Menu> getMenuByUserId(String name) {
+        UserInfo userDetail = userInfoRepository.findByName(name).get();
+        return menuRepository.findAllByUserId(userDetail.getId());
     }
 
 }

@@ -19,7 +19,9 @@ public class UserProfileServiceImpl implements UserProfileService {
                 name(userInfo.getName()).
                 userSurName(userInfo.getUserSurName()).
                 email(userInfo.getEmail()).
-                userName(userInfo.getUserName())
+                userName(userInfo.getUserName()).
+                roles(userInfo.getRoles()).
+                userIdentifier(userInfo.getUserIdentifier())
                 .build();
         return profile;
     }

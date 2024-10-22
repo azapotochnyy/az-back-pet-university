@@ -21,9 +21,9 @@ public class GroupController {
         this.service = service;
     }
 
-    @GetMapping("/{id}")
-    public List<GroupOfUsers> getGroups(@PathVariable UUID id) {
-        return service.getAllGroups(id);
+    @GetMapping("/{userId}")
+    public List<GroupOfUsers> getMenuByUserId(@PathVariable UUID userId) {
+        return service.getAllGroups(userId);
     }
 
     @PostMapping()

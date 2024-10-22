@@ -3,6 +3,8 @@ package com.university.task.fullstack.dto;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Builder
 @Data
 public class ProfileDto {
@@ -11,4 +13,5 @@ public class ProfileDto {
     private String userSurName;
     private String email;
     private String roles;
+    private UUID userIdentifier;
 }
