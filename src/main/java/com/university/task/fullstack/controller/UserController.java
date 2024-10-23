@@ -32,11 +32,6 @@ public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @GetMapping("/welcome")
-    public String welcome() {
-        return "Welcome this endpoint is not secure";
-    }
-
     @PostMapping("/addNewUser")
     public ResponseEntity<?> addNewUser(@RequestBody UserInfo userInfo) {
         return new ResponseEntity<>(service.addUser(userInfo), HttpStatus.OK);
@@ -46,11 +41,6 @@ public class UserController {
     public ResponseEntity<?> userProfile(Authentication authentication) {
         ProfileDto response = userProfileService.getUserProfileByUserName(authentication.getName());
         return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @GetMapping("/admin/adminProfile")
-    public String admnProfile() {
-        return "Welcome to Admin Profile";
     }
 
     @PostMapping("/generateToken")
